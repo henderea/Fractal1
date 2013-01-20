@@ -57,13 +57,13 @@ public class MainClass extends JFrame
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_UP)
                 {
-                    dp.angleDiff += inc;
+                    dp.angleDiff += inc * (e.isControlDown() ? 10 : 1);
                     if(dp.angleDiff > 120)
                         dp.angleDiff = 120;
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_DOWN)
                 {
-                    dp.angleDiff -= inc;
+                    dp.angleDiff -= inc * (e.isControlDown() ? 10 : 1);
                     if(dp.angleDiff < 5)
                         dp.angleDiff = 5;
                 }
