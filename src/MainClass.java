@@ -30,6 +30,7 @@ public class MainClass extends JFrame
         models.add(new Model("Koch 2").dad(90).seg(3).m('F', "F-F+F+F-F"));
         models.add(new Model("Sierpinski").it(8).dad(60).seg(2).init("A").ia(-60).ip(0.5, 0.05).m('A', "B-A-B").m('B', "A+B+A").fm('A', "F").fm('B', "F"));
         models.add(new Model("Carpet").dad(90).seg(3).m('F', "F+F-F-F-f+F+F+F-F").m('f', "fff"));
+        models.add(new Model("Median").it(8).dad(45).seg(1.645).init("L--F--L--F").m('L', "+R-F-R+").m('R', "-L+F+L-").fm('L', "F").fm('R', "F"));
         models.add(new Model("Dragon").it(10).dad(90).seg(1.5).init("FX").ip(0.3, 0.6).m('X', "X+YF").m('Y', "FX-Y"));
         models.add(new Model("Gosper").ia(30).dad(60).seg(3).init("XF").ip(0.4, 0.2).m('X', "X+YF++YF-FX--FXFX-YF+").m('Y', "-FX+YFYF++YF+FX--FX-Y"));
         models.add(new Model("Penrose").it(4).dad(36).seg(2).init("[7]++[7]++[7]++[7]++[7]").ip(0.5, 0.5).m('6', "81++91----71[-81----61]++").m('7', "+81--91[---61--71]+").m('8', "-61++71[+++81++91]-").m('9', "--81++++61[+91++++71]--71").m('1', "").fm('1', "F"));
