@@ -23,11 +23,14 @@ public class MainClass extends JFrame
         models.add(new Model("Weed").dad(25).seg(3).m('F', "F[-F]F[+F]F"));
         models.add(new Model("Weed 2").it(5).dad(90).seg(3).m('F', "FF[-F-F][+F+F]F"));
         models.add(new Model("Weed 3").it(6).dad(25).seg(2.4).init("X").m('X', "F-[[X]+X]+F[+FX]-X").m('F', "FF").ia(60).ip(0.2, 0.9));
+        models.add(new Model("Plant").dad(25).seg(2.5).init("X").m('X', "F-[[X]+X]+F[+FX]-X").m('F', "FF"));
         models.add(new Model("Peano").dad(90).seg(3).m('F', "FF+F+F+FF+F+F-F"));
+        models.add(new Model("Peano 2").dad(90).seg(3).init("X").ip(0, 1).m('X', "XFYFX+F+YFXFY-F-XFYFX").m('Y', "YFXFY-F-XFYFX+F+YFXFY"));
         models.add(new Model("Koch").dad(60).seg(3).m('F', "F-F++F-F"));
         models.add(new Model("Koch 2").dad(90).seg(3).m('F', "F-F+F+F-F"));
         models.add(new Model("Sierpinski").it(8).dad(60).seg(2).init("A").ia(-60).ip(0.5, 0.05).m('A', "B-A-B").m('B', "A+B+A").fm('A', "F").fm('B', "F"));
         models.add(new Model("Dragon").it(10).dad(90).seg(1.5).init("FX").ip(0.3, 0.6).m('X', "X+YF").m('Y', "FX-Y"));
+        models.add(new Model("Gosper").ia(30).dad(60).seg(3).init("XF").ip(0.4, 0.2).m('X', "X+YF++YF-FX--FXFX-YF+").m('Y', "-FX+YFYF++YF+FX--FX-Y"));
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -66,10 +69,12 @@ public class MainClass extends JFrame
                 }
                 else if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
                     System.exit(0);
+                setTitle("Angle Diff: "+dp.angleDiff+"; Model: "+models.get(mind).name);
                 repaint();
             }
         });
         this.setVisible(true);
+        setTitle("Angle Diff: "+dp.angleDiff+"; Model: "+models.get(mind).name);
     }
 
     private class Model
@@ -197,8 +202,8 @@ public class MainClass extends JFrame
         {
             String pattern = curModel.genPattern();
             Graphics2D g2 = (Graphics2D)g;
-            g2.drawString("Angle Diff: "+angleDiff, 10, 20);
-            g2.drawString("Model: "+curModel.name, 10, 40);
+            //g2.drawString("Angle Diff: "+angleDiff, 10, 20);
+            //g2.drawString("Model: "+curModel.name, 10, 40);
             g2.setColor(Color.white);
             g2.drawRect(0, 0, this.getWidth(), this.getHeight());
             g2.setColor(Color.black);
