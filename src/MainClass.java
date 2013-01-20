@@ -20,26 +20,14 @@ public class MainClass extends JFrame
     public MainClass()
     {
         models = new ArrayList<Model>();
-        models.add(new Model(25, 3, "F[-F]F[+F]F", "Weed"));
-        models.add(new Model(5, 90, 3, "FF[-F-F][+F+F]F", "Weed 2"));
-        Map<Character, String> weed3Mappings = new HashMap<Character, String>();
-        weed3Mappings.put('X', "F-[[X]+X]+F[+FX]-X");
-        weed3Mappings.put('F', "FF");
-        models.add(new Model(6, 25, 2.4, "X", "Weed 3", weed3Mappings, null).setInitAngle(60).setInitPos(0.2, 0.9));
-        models.add(new Model(90, 3, "FF+F+F+FF+F+F-F", "Peano"));
-        models.add(new Model(60, 3, "F-F++F-F", "Koch"));
-        models.add(new Model(90, 3, "F-F+F+F-F", "Koch 2"));
-        Map<Character, String> stMappings = new HashMap<Character, String>();
-        stMappings.put('A', "B-A-B");
-        stMappings.put('B', "A+B+A");
-        Map<Character, String> stFMappings = new HashMap<Character, String>();
-        stFMappings.put('A', "F");
-        stFMappings.put('B', "F");
-        models.add(new Model(8, 60, 2, "A", "Sierpinski", stMappings, stFMappings).setInitAngle(-60).setInitPos(0.5, 0.05));
-        Map<Character, String> drMappings = new HashMap<Character, String>();
-        drMappings.put('X', "X+YF");
-        drMappings.put('Y', "FX-Y");
-        models.add(new Model(10, 90, 1.5, "FX", "Dragon", drMappings, null).setInitPos(0.3, 0.6));
+        models.add(new Model("Weed").dad(25).seg(3).m('F', "F[-F]F[+F]F"));
+        models.add(new Model("Weed 2").it(5).dad(90).seg(3).m('F', "FF[-F-F][+F+F]F"));
+        models.add(new Model("Weed 3").it(6).dad(25).seg(2.4).init("X").m('X', "F-[[X]+X]+F[+FX]-X").m('F', "FF").ia(60).ip(0.2, 0.9));
+        models.add(new Model("Peano").dad(90).seg(3).m('F', "FF+F+F+FF+F+F-F"));
+        models.add(new Model("Koch").dad(60).seg(3).m('F', "F-F++F-F"));
+        models.add(new Model("Koch 2").dad(90).seg(3).m('F', "F-F+F+F-F"));
+        models.add(new Model("Sierpinski").it(8).dad(60).seg(2).init("A").ia(-60).ip(0.5, 0.05).m('A', "B-A-B").m('B', "A+B+A").fm('A', "F").fm('B', "F"));
+        models.add(new Model("Dragon").it(10).dad(90).seg(1.5).init("FX").ip(0.3, 0.6).m('X', "X+YF").m('Y', "FX-Y"));
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -97,113 +85,60 @@ public class MainClass extends JFrame
         private double initX = 0.5;
         private double initY = 1;
 
-        public Model setInitAngle(double angle)
+        public Model ia(double angle)
         {
             this.initialAngle = angle;
             return this;
         }
 
-        public Model setInitPos(double initX, double initY)
+        public Model ip(double initX, double initY)
         {
             this.initX = initX;
             this.initY = initY;
             return this;
         }
 
-        public Model(double defaultAngleDiff, double segments, String fReplace, String name)
-        {
-            this.defaultAngleDiff = defaultAngleDiff;
-            this.segments = segments;
-            this.name = name;
-            this.mappings = new HashMap<Character, String>();
-            this.mappings.put('F', fReplace);
-            this.finalMappings = new HashMap<Character, String>();
-        }
-
-        public Model(int iterations, double defaultAngleDiff, double segments, String fReplace, String name)
+        public Model it(int iterations)
         {
             this.iterations = iterations;
+            return this;
+        }
+
+        public Model init(String init)
+        {
+            this.init = init;
+            return this;
+        }
+
+        public Model dad(double defaultAngleDiff)
+        {
             this.defaultAngleDiff = defaultAngleDiff;
+            return this;
+        }
+
+        public Model seg(double segments)
+        {
             this.segments = segments;
+            return this;
+        }
+
+        public Model m(char from, String to)
+        {
+            this.mappings.put(from, to);
+            return this;
+        }
+
+        public Model fm(char from, String to)
+        {
+            this.finalMappings.put(from, to);
+            return this;
+        }
+
+        public Model(String name)
+        {
             this.name = name;
             this.mappings = new HashMap<Character, String>();
-            this.mappings.put('F', fReplace);
             this.finalMappings = new HashMap<Character, String>();
-        }
-
-        public Model(double defaultAngleDiff, double segments, String init, String fReplace, String name)
-        {
-            this.defaultAngleDiff = defaultAngleDiff;
-            this.segments = segments;
-            this.init = init;
-            this.name = name;
-            this.mappings = new HashMap<Character, String>();
-            this.mappings.put('F', fReplace);
-            this.finalMappings = new HashMap<Character, String>();
-        }
-
-        public Model(int iterations, double defaultAngleDiff, double segments, String init, String fReplace, String name)
-        {
-            this.iterations = iterations;
-            this.defaultAngleDiff = defaultAngleDiff;
-            this.segments = segments;
-            this.init = init;
-            this.name = name;
-            this.mappings = new HashMap<Character, String>();
-            this.mappings.put('F', fReplace);
-            this.finalMappings = new HashMap<Character, String>();
-        }
-
-        public Model(double defaultAngleDiff, double segments, String name, Map<Character, String> mappings, Map<Character, String> finalMappings)
-        {
-            this.defaultAngleDiff = defaultAngleDiff;
-            this.segments = segments;
-            this.name = name;
-            this.mappings = mappings;
-            if(finalMappings == null)
-                this.finalMappings = new HashMap<Character, String>();
-            else
-                this.finalMappings = finalMappings;
-        }
-
-        public Model(int iterations, double defaultAngleDiff, double segments, String name, Map<Character, String> mappings, Map<Character, String> finalMappings)
-        {
-            this.iterations = iterations;
-            this.defaultAngleDiff = defaultAngleDiff;
-            this.segments = segments;
-            this.name = name;
-            this.mappings = mappings;
-            if(finalMappings == null)
-                this.finalMappings = new HashMap<Character, String>();
-            else
-                this.finalMappings = finalMappings;
-        }
-
-        public Model(double defaultAngleDiff, double segments, String init, String name, Map<Character, String> mappings, Map<Character, String> finalMappings)
-        {
-            this.defaultAngleDiff = defaultAngleDiff;
-            this.segments = segments;
-            this.init = init;
-            this.name = name;
-            this.mappings = mappings;
-            if(finalMappings == null)
-                this.finalMappings = new HashMap<Character, String>();
-            else
-                this.finalMappings = finalMappings;
-        }
-
-        public Model(int iterations, double defaultAngleDiff, double segments, String init, String name, Map<Character, String> mappings, Map<Character, String> finalMappings)
-        {
-            this.iterations = iterations;
-            this.defaultAngleDiff = defaultAngleDiff;
-            this.segments = segments;
-            this.init = init;
-            this.name = name;
-            this.mappings = mappings;
-            if(finalMappings == null)
-                this.finalMappings = new HashMap<Character, String>();
-            else
-                this.finalMappings = finalMappings;
         }
 
         public String permute(String input)
