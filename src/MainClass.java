@@ -21,7 +21,7 @@ public class MainClass extends JFrame
     {
         models = new ArrayList<Model>();
         models.add(new Model("Weed").dad(25).seg(3).m('F', "F[-F]F[+F]F"));
-        models.add(new Model("Weed 3").it(6).dad(25).seg(2.4).init("X").m('X', "F-[[X]+X]+F[+FX]-X").m('F', "FF").ia(60).ip(0.2, 0.9));
+        models.add(new Model("Weed 2").it(6).dad(25).seg(2.4).init("X").m('X', "F-[[X]+X]+F[+FX]-X").m('F', "FF").ia(60).ip(0.2, 0.9));
         models.add(new Model("Vine").dad(70).seg(3).m('F', "FF+F+F+FF+F+F-F"));
         models.add(new Model("Design 1").it(5).dad(90).seg(3).m('F', "FF[-F-F][+F+F]F"));
         models.add(new Model("Design 2").it(5).dad(90).seg(3).m('F', "F[|+F][|-F]F[-F][+F]F"));
