@@ -210,8 +210,6 @@ public class MainClass extends JFrame
         {
             String pattern = curModel.genPattern();
             Graphics2D g2 = (Graphics2D)g;
-            //g2.drawString("Angle Diff: "+angleDiff, 10, 20);
-            //g2.drawString("Model: "+curModel.name, 10, 40);
             g2.setColor(Color.white);
             g2.drawRect(0, 0, this.getWidth(), this.getHeight());
             g2.setColor(Color.black);
@@ -223,16 +221,18 @@ public class MainClass extends JFrame
                 char c = pattern.charAt(i);
                 if(c == 'F')
                 {
-                    Point2D.Double newPoint = new Point2D.Double(curData.pos.x + Math.cos(Math.toRadians(curData.angle))*lineLength, curData.pos.y - Math.sin(Math.toRadians(curData.angle))*lineLength);
-                    g2.draw(new Line2D.Double(curData.pos, newPoint));
-                    curData.pos = newPoint;
+                    Point2D.Double oldPoint = curData.pos;
+                    curData.move(lineLength);
+                    g2.draw(new Line2D.Double(oldPoint, curData.pos));
                 }
                 else if(c == 'f')
-                    curData.pos = new Point2D.Double(curData.pos.x + Math.cos(Math.toRadians(curData.angle))*lineLength, curData.pos.y - Math.sin(Math.toRadians(curData.angle))*lineLength);
+                    curData.move(lineLength);
                 else if(c == '-')
-                    curData.angle += angleDiff;
+                    curData.rotate(angleDiff);
                 else if(c == '+')
-                    curData.angle -= angleDiff;
+                    curData.rotate(-angleDiff);
+                else if(c == '|')
+                    curData.rotate(180);
                 else if(c == '[')
                     stk.push(curData.clone());
                 else if(c == ']')
@@ -248,7 +248,34 @@ public class MainClass extends JFrame
             public StackData(Point2D.Double pos, double angle)
             {
                 this.pos = pos;
-                this.angle = angle;
+                this.angle = 0;
+                rotate(angle);
+            }
+
+            public StackData rotate(double angle)
+            {
+                this.angle += angle;
+                if(this.angle > 0)
+                {
+                    while(this.angle > 180)
+                    {
+                        this.angle -= 360;
+                    }
+                }
+                else
+                {
+                    while(this.angle <= -180)
+                    {
+                        this.angle += 360;
+                    }
+                }
+                return this;
+            }
+
+            public StackData move(double length)
+            {
+                pos = new Point2D.Double(pos.x + Math.cos(Math.toRadians(angle))*length, pos.y - Math.sin(Math.toRadians(angle))*length);
+                return this;
             }
 
             public StackData clone()
