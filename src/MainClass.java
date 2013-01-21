@@ -28,6 +28,7 @@ public class MainClass extends JFrame
         models.add(new Model("Space-filling 2").it(6).ia(-90).dad(90).seg(2).init("X").ip(0, 0).m('X', "-YF+XFX+FY-").m('Y', "+XF-YFY-FX+"));
         models.add(new Model("Koch").dad(60).seg(3).m('F', "F-F++F-F"));
         models.add(new Model("Koch 2").dad(90).seg(3).m('F', "F-F+F+F-F"));
+        models.add(new Model("Koch 3").ia(120).dad(60).seg(3.1).init("F++F++F").m('F', "F-F++F-F"));
         models.add(new Model("Sierpinski").it(8).dad(60).seg(2).init("A").ia(-60).ip(0.5, 0.05).m('A', "B-A-B").m('B', "A+B+A").fm('A', "F").fm('B', "F"));
         models.add(new Model("Carpet").dad(90).seg(3).m('F', "F+F-F-F-f+F+F+F-F").m('f', "fff"));
         models.add(new Model("Median").it(8).dad(45).seg(1.645).init("L--F--L--F").m('L', "+R-F-R+").m('R', "-L+F+L-").fm('L', "F").fm('R', "F"));
