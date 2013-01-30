@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a26759bf-8d99-4f98-889b-71542d40318a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-    </list>
+    <list default="true" id="a26759bf-8d99-4f98-889b-71542d40318a" name="Default" comment="" />
     <ignored path="Fractal1.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="a26759bf-8d99-4f98-889b-71542d40318a" time="1359556348660" ignored="false" />
@@ -68,7 +66,7 @@
       <file leaf-file-name="MainClass.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="32" selection-start="979" selection-end="979" vertical-scroll-proportion="0.44313148">
+            <state line="27" column="32" selection-start="979" selection-end="979" vertical-scroll-proportion="0.022156574">
               <folding />
             </state>
           </provider>
@@ -414,7 +412,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/MainClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="32" selection-start="979" selection-end="979" vertical-scroll-proportion="0.44313148">
+        <state line="27" column="32" selection-start="979" selection-end="979" vertical-scroll-proportion="0.022156574">
           <folding />
         </state>
       </provider>
