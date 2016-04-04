@@ -1,7 +1,2 @@
 build
 out
-.idea
-*.iml
-nbproject
-manifest.mf
-build.xml
